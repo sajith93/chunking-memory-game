@@ -1,223 +1,175 @@
-// Number of objects to generate
-const totalObjects = 8;
-// Number of columns in the grid
-const gridSize = 6;
-// Array to store the generated objects
-let objects = [];
-// Flag to track game status
-let isGameStarted = false;
-
-// Generate random objects
-function generateObjects() {
-  const objectContainer = document.getElementById('objects');
-  objectContainer.innerHTML = '';
-
-  const colors = ['red', 'black'];
-  const shapes = ['square', 'circle'];
-
-  for (let i = 0; i < totalObjects; i++) {
-    const object = document.createElement('div');
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-
-    object.classList.add('object', randomShape);
-    object.style.backgroundColor = randomColor;
-    objectContainer.appendChild(object);
-    objects.push(object);
-  }
-}
-
-// Shuffle the objects array
-function shuffleObjects() {
-  for (let i = objects.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [objects[i], objects[j]] = [objects[j], objects[i]];
-  }
-}
-
-// Show objects to the player
-function showObjects(duration) {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-
-  const availableCells = Array.from({ length: gridSize * gridSize }, (_, i) => i);
-  shuffleObjects();
-
-  for (let i = 0; i < totalObjects; i++) {
-    const object = objects[i];
-    const randomCellIndex = Math.floor(Math.random() * availableCells.length);
-    const cellIndex = availableCells[randomCellIndex];
-
-    const row = Math.floor(cellIndex / gridSize);
-    const col = cellIndex % gridSize;
-
-    object.style.top = `${row * 80}px`;
-    object.style.left = `${col * 80}px`;
-
-    grid.appendChild(object);
-
-    availableCells.splice(randomCellIndex, 1);
-  }
-
-  setTimeout(function () {
-    hideObjects();
-    startTimer(duration);
-  }, duration * 1000);
-}
-
-// Hide the objects from the player
-function hideObjects() {
-  for (let i = 0; i < objects.length; i++) {
-    objects[i].style.display = 'none';
-  }
-}
-
-// Timer countdown
-function startTimer(duration) {
-  let timer = duration;
-  const timeDisplay = document.getElementById('time');
-  timeDisplay.textContent = timer;
-
-  let timerInterval = setInterval(function () {
-    timer--;
-    timeDisplay.textContent = timer;
-
-    if (timer < 0) {
-      clearInterval(timerInterval);
-      timeDisplay.textContent = '0';
-      endGame();
-    }
-  }, 1000);
-}
-
-// Validate the solution
-function validateSolution() {
-  let correctCount = 0;
-
-  for (let i = 0; i < objects.length; i++) {
-    const object = objects[i];
-    const rect = object.getBoundingClientRect();
-
-    // Check if the object is in the correct position
-    if (rect.left === i % gridSize * 80 && rect.top === Math.floor(i / gridSize) * 80) {
-      correctCount++;
-    }
-  }
-
-  return correctCount === objects.length;
-}
-
-// End the game
-function endGame() {
-  const feedback = document.getElementById('feedback');
-  const restartButton = document.getElementById('restartButton');
-
-  if (validateSolution()) {
-    feedback.textContent = 'Congratulations! You completed the game successfully.';
-  } else {
-    feedback.textContent = 'Oops! Time\'s up or the objects are not in the correct positions.';
-  }
-
-  restartButton.style.display = 'block';
-  isGameStarted = false;
-}
-
-// Restart the game
-function restartGame() {
-  objects = [];
-  isGameStarted = false;
-  const feedback = document.getElementById('feedback');
-  const restartButton = document.getElementById('restartButton');
-  const timeDisplay = document.getElementById('time');
-
-  feedback.textContent = '';
-  restartButton.style.display = 'none';
-  timeDisplay.textContent = '';
-
-  initGame();
-}
-
-// Initialize the game
-function initGame() {
-  generateObjects();
-  showObjects(5); // Show objects for 5 seconds
-
-  isGameStarted = true;
-}
-
-// Start button click event
-document.getElementById('startButton').addEventListener('click', function () {
-  if (!isGameStarted) {
-    initGame();
-  }
-});
-
-// Restart button click event
-document.getElementById('restartButton').addEventListener('click', function () {
-  restartGame();
-});
-
-// Drag and drop functionality
-interact('.object')
-  .draggable({
-    inertia: true,
-    modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: 'parent',
-        endOnly: true
-      })
-    ],
-    autoScroll: true,
-    listeners: {
-      start(event) {
-        event.target.classList.add('dragging');
-      },
-      move(event) {
-        const target = event.target;
-        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-        target.style.transform = `translate(${x}px, ${y}px)`;
-        target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);
-      },
-      end(event) {
-        event.target.classList.remove('dragging');
-      }
-    }
-  })
-  .resizable({
-    edges: {
-      top: true,
-      left: true,
-      bottom: true,
-      right: true
-    },
-    listeners: {
-      move(event) {
-        const target = event.target;
-        const x = (parseFloat(target.getAttribute('data-x')) || 0);
-        const y = (parseFloat(target.getAttribute('data-y')) || 0);
-
-        target.style.width = `${event.rect.width}px`;
-        target.style.height = `${event.rect.height}px`;
-        target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);
-      }
-    }
-  })
-  .on('resizemove', function (event) {
-    const target = event.target;
-    const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.deltaRect.left;
-    const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.deltaRect.top;
-
-    target.style.transform = `translate(${x}px, ${y}px)`;
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-  });
-
-// Initialize the game when the DOM is ready
 document.addEventListener('DOMContentLoaded', function () {
-  const restartButton = document.getElementById('restartButton');
-  restartButton.addEventListener('click', restartGame);
+  const grid = document.querySelector('.grid'); // Get the grid element
+  const timerContainer = document.querySelector('.timer-container'); // Get the timer container element
+  const timer = document.querySelector('.timer'); // Get the timer element
+  const palette = document.querySelector('.palette'); // Get the palette element
+  const startButton = document.querySelector('.start-button'); // Get the start button element
+  const submitButton = document.querySelector('.submit-button'); // Get the submit button element
+  const message = document.querySelector('.message'); // Get the message element
+
+  const objects = [
+    { shape: 'square', color: 'red' },
+    { shape: 'square', color: 'black' },
+    { shape: 'circle', color: 'red' },
+    { shape: 'circle', color: 'black' }
+  ];
+
+  let sequence = []; // Store the sequence of object positions
+  let playerSelection = []; // Store the player's object selection
+  let isPlaying = false; // Flag to check if the game is currently being played
+
+  // Generate random positions for the objects
+  function generateRandomPositions() {
+    const positions = [];
+
+    while (positions.length < 16) {
+      const randomPosition = Math.floor(Math.random() * 64); // Generate a random position between 0 and 63
+      if (!positions.includes(randomPosition)) {
+        positions.push(randomPosition); // Add the unique random position to the array
+      }
+    }
+
+    return positions; // Return the array of random positions
+  }
+
+  // Display the objects on the grid
+  function displayObjects() {
+    grid.innerHTML = ''; // Clear the grid
+
+    const positions = generateRandomPositions(); // Generate random positions
+
+    for (let i = 0; i < 64; i++) {
+      const cell = document.createElement('div'); // Create a div element for each grid cell
+      cell.classList.add('cell'); // Add the 'cell' class to the cell element
+      cell.dataset.position = i; // Set the custom 'position' attribute to store the position
+
+      const objectIndex = positions.indexOf(i); // Get the object index for the current position
+      if (objectIndex !== -1) {
+        const { shape, color } = objects[objectIndex % 4]; // Get the object's shape and color based on the object index
+        cell.textContent = shape === 'square' ? '■' : '●'; // Display the shape as a square or circle
+        cell.style.color = color; // Set the color of the shape
+      }
+
+      grid.appendChild(cell); // Add the cell element to the grid
+    }
+  }
+
+  // Start the game by displaying the sequence
+  function startGame() {
+    if (!isPlaying) {
+      isPlaying = true;
+      sequence = generateRandomPositions(); // Generate random positions for the sequence
+      displaySequence(); // Display the sequence of objects
+
+      // Start the timer
+      let timeLeft = 30; // Set the initial time to 30 seconds
+      let timerWidth = 100; // Set the initial timer width to 100%
+      const timerInterval = setInterval(() => {
+        timeLeft--;
+        timerWidth = (timeLeft / 30) * 100;
+        timer.style.width = timerWidth + '%';
+
+        if (timeLeft === 0) {
+          clearInterval(timerInterval);
+          hideSequence(); // Hide the sequence after 30 seconds
+        }
+      }, 1000);
+    }
+  }
+
+  // Display the sequence of object positions
+  function displaySequence() {
+    sequence.forEach((position, index) => {
+      setTimeout(() => {
+        const cell = document.querySelector(`.cell[data-position="${position}"]`); // Get the cell element for the current position
+        cell.classList.add('highlight'); // Add the 'highlight' class to the cell to visually indicate the object
+        setTimeout(() => {
+          cell.classList.remove('highlight'); // Remove the 'highlight' class after 500 milliseconds
+        }, 500);
+      }, 1000 * index); // Delay the highlighting of each object in the sequence
+    });
+  }
+
+  // Hide the sequence after displaying it
+  function hideSequence() {
+    grid.querySelectorAll('.cell').forEach(cell => {
+      cell.textContent = '';
+    });
+    startPlayerInteraction(); // Start player interaction after hiding the sequence
+  }
+
+  // Start player interaction by enabling drag and drop
+  function startPlayerInteraction() {
+    palette.querySelectorAll('.object').forEach(object => {
+      object.addEventListener('dragstart', dragStart);
+    });
+    grid.addEventListener('dragover', dragOver);
+    grid.addEventListener('drop', drop);
+  }
+
+  // Handle drag start event for objects
+  function dragStart(event) {
+    event.dataTransfer.setData('text/plain', event.target.dataset.shape + '-' + event.target.dataset.color);
+  }
+
+  // Handle drag over event for the grid
+  function dragOver(event) {
+    event.preventDefault();
+  }
+
+  // Handle drop event on the grid
+  function drop(event) {
+    event.preventDefault();
+    const cell = event.target.closest('.cell'); // Get the closest parent cell element of the drop target
+    if (cell && cell.textContent === '') {
+      const data = event.dataTransfer.getData('text/plain').split('-');
+      const shape = data[0];
+      const color = data[1];
+      const position = parseInt(cell.dataset.position);
+      cell.textContent = shape === 'square' ? '■' : '●';
+      cell.style.color = color;
+      playerSelection[position] = { shape, color }; // Store the player's selection in the playerSelection array
+    }
+  }
+
+  // Submit the player's answer
+  function submitAnswer() {
+    if (isPlaying) {
+      isPlaying = false;
+
+      // Compare the player's answer with the correct objects' position, shape, and color
+      const isCorrect = sequence.every((position, index) => {
+        const cell = document.querySelector(`.cell[data-position="${position}"]`);
+        const shape = cell.textContent === '■' ? 'square' : 'circle';
+        const color = cell.style.color;
+        const playerObject = playerSelection[position];
+        return (
+          playerObject &&
+          playerObject.shape === shape &&
+          playerObject.color === color
+        );
+      });
+
+      // Provide feedback to the player
+      message.textContent = isCorrect ? 'Correct answer!' : 'Incorrect answer!';
+      message.style.color = isCorrect ? 'green' : 'red';
+
+      // Clear player's selection after a delay
+      setTimeout(() => {
+        grid.querySelectorAll('.cell').forEach(cell => {
+          cell.textContent = '';
+          cell.style.color = '';
+        });
+        playerSelection = []; // Clear the player's selection array
+        message.textContent = ''; // Clear the feedback message
+      }, 1500);
+    }
+  }
+
+  // Event listeners
+  startButton.addEventListener('click', startGame); // Call startGame function when the start button is clicked
+  submitButton.addEventListener('click', submitAnswer); // Call submitAnswer function when the submit button is clicked
+
+  // Initialize the game
+  displayObjects(); // Display the initial objects on the grid
 });

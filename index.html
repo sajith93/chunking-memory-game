@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="/style.css">
+  <title>Chunking Memory Game</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div id="container">
-    <h1>Memory Game</h1>
-    <div id="objects"></div>
-    <div id="grid"></div>
-    <div id="timer">Time: <span id="time"></span></div>
-    <button id="startButton">Start</button>
-    <button id="restartButton" style="display: none;">Restart</button>
-    <div id="feedback"></div>
+  <h1>Chunking Memory Game</h1>
+  <div class="grid"></div>
+  <div class="timer-container">
+    <div class="timer"></div>
   </div>
-  <script src="/script.js"></script>
+  <div class="palette">
+    <div class="object" draggable="true" data-shape="square" data-color="red">■</div>
+    <div class="object" draggable="true" data-shape="square" data-color="black">■</div>
+    <div class="object" draggable="true" data-shape="circle" data-color="red">●</div>
+    <div class="object" draggable="true" data-shape="circle" data-color="black">●</div>
+  </div>
+  <button class="start-button">Start Game</button>
+  <button class="submit-button">Submit</button>
+  <p class="message"></p>
+
+  <script src="script.js"></script>
 </body>
 </html>
