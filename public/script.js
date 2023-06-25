@@ -1,0 +1,322 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const grid = document.querySelector('.grid'); // Get the grid element
+  const solutionGrid = document.querySelector('.solution-grid'); // Get the grid element
+  const timerContainer = document.querySelector('.timer-container'); // Get the timer container element
+  const timer = document.querySelector('.timer'); // Get the timer element
+  const palette = document.querySelector('.palette'); // Get the palette element
+  const startButton = document.querySelector('.start-button'); // Get the start button element
+  const submitButton = document.querySelector('.submit-button'); // Get the submit button element
+  const message = document.querySelector('.message'); // Get the message element
+  const timerSetting = document.querySelector('#timer-count');
+  const correctSolutionH3 = document.querySelector('.solution-grid-text');
+
+  const objects = [
+    { shape: 'square', color: 'red' },
+    { shape: 'square', color: 'black' },
+    { shape: 'circle', color: 'red' },
+    { shape: 'circle', color: 'black' }
+  ];
+
+  let playerSelection = []; // Store the player's object selection
+  let isPlaying = false; // Flag to check if the game is currently being played
+  let draggingObject = null; // Store the currently dragging object
+  let positions = [];
+  const grid_len = 6;
+  const grid_size = grid_len**2;
+
+  // Generate random positions for the objects
+  function generateRandomPositions() {
+    positions = [];
+    while (positions.length < 16) {
+      const randomPosition = Math.floor(Math.random() * (grid_size)); // Generate a random position between 0 and 63
+      if (!positions.includes(randomPosition)) {
+        positions.push(randomPosition); // Add the unique random position to the array
+      }
+    }
+
+    return positions; // Return the array of random positions
+  }
+
+  // Display the objects on the grid
+  function displayObjects() {
+    grid.innerHTML = ''; // Clear the grid
+
+    const positions = generateRandomPositions(); // Generate random positions
+
+    for (let i = 0; i < (grid_size); i++) {
+      const cell = document.createElement('div'); // Create a div element for each grid cell
+      cell.classList.add('cell'); // Add the 'cell' class to the cell element
+      cell.dataset.position = i; // Set the custom 'position' attribute to store the position
+
+      const objectIndex = positions.indexOf(i); // Get the object index for the current position
+        //cell.textContent = shape === 'square' ? '■' : '●'; // Display the shape as a square or circle
+        //cell.style.color = color; // Set the color of the shape
+        
+        
+        const cellObj = document.createElement('div');
+        cellObj.setAttribute('id', i)
+        cellObj.classList.add("cell-obj");   
+        cellObj.classList.add("grid-cell-obj");   
+
+        if (objectIndex !== -1) {
+          const { shape, color } = objects[objectIndex % 4]; // Get the object's shape and color based on the object index
+  
+        let classObjName= color+'-'+shape;
+        cellObj.dataset.objName = classObjName;
+        cellObj.classList.add(classObjName);     
+        //cellObj.textContent = shape === 'square' ? '■' : '●'; // Display the shape as a square or circle
+        }
+        else {
+          cellObj.dataset.objName = '';
+        }
+
+        cellObj.addEventListener("dragstart", dragStart);
+        cellObj.addEventListener("dragend", dragEnd);
+
+        cellObj.classList.add('hidden');
+        
+        cell.appendChild(cellObj);
+
+        cell.addEventListener("dragover", dragOver);
+        cell.addEventListener("drop", drop);
+      
+
+      grid.appendChild(cell); // Add the cell element to the grid
+    }
+    // getSequence();
+  }
+
+  function getSequence(){
+    let cellObjs = document.querySelectorAll(".grid > .cell > .cell-obj");
+    let currentSequence = [];
+    cellObjs.forEach(cellObj => {
+      currentSequence.push(cellObj.dataset.objName);    
+    });
+    console.log(currentSequence);
+    return currentSequence;
+  }
+
+  function dragStart(event) {
+    event.dataTransfer.setData("draggedCellObjId", event.target.id);
+    setTimeout(() => event.target.classList.toggle("hidden"));
+  }
+
+  function dragEnd(event) {
+    event.target.classList.toggle("hidden");
+    
+  }
+
+  function dragOver(event) {
+    event.preventDefault();
+  }
+
+  function drop(event) {
+    const draggedCellObjId = event.dataTransfer.getData("draggedCellObjId");
+    const draggedCellObj = document.getElementById(draggedCellObjId);
+    const fromCell = draggedCellObj.parentNode;
+    const toCell = event.currentTarget;
+
+    if (toCell !== fromCell) {
+      fromCell.appendChild(toCell.firstElementChild);
+      toCell.appendChild(draggedCellObj);
+      getSequence();
+      calcScore();
+    }
+    
+  }
+
+  let originSequence = []
+  let timerInterval=0;
+
+
+  // Start the game by displaying the sequence
+  function startGame() {
+    grid.innerHTML = ''; // Clear the grid
+    palette.innerHTML = ''; // Clear the grid
+    solutionGrid.innerHTML = '';// Clear the solution grid
+    correctSolutionH3.textContent = '';
+    originSequence = []
+
+    try{
+      clearInterval(timerInterval);
+      console.log('reset interval;');
+      }
+      catch {}
+
+    displayObjects()
+
+    // if (!isPlaying) {
+      isPlaying = true;
+
+      let cellObjs = document.querySelectorAll(".cell-obj");
+      
+      cellObjs.forEach(cellObj => {
+        cellObj.classList.remove('hidden');
+        originSequence.push(cellObj.dataset.objName);    
+      });
+
+      // Start the timer
+      let timerSettingInt = parseInt(timerSetting.textContent);
+      let totalTime = timerSettingInt*100; // Set the initial time to 30 seconds
+      let timeLeft = totalTime;
+      let timerWidth = 100; // Set the initial timer width to 100%
+      timer.style.width = timerWidth + '%';
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerWidth = (timeLeft / totalTime) * 100;
+        timer.style.width = timerWidth + '%';
+        if (timeLeft>= 0){
+          timer.textContent = Math.ceil(timeLeft/100);
+          }else{
+            clearInterval(timerInterval);
+            console.log('reset interval;');
+
+            cellObjs.forEach(cellObj => {
+              cellObj.dataset.objName = '';
+              cellObj.className = 'cell-obj grid-cell-obj'
+              cellObj.setAttribute('draggable', true);
+              // cellObj.classList.add('hidden');
+ 
+            });
+            console.log("originSequence:", originSequence);
+            addElementstoPallete();
+          }
+        }, 10);
+
+  
+          timer.textContent = 0;
+          // clearInterval(timerInterval);
+          // hideSequence(); // Hide the sequence after 30 seconds
+
+          
+          
+        
+      
+    // }
+  }
+
+  function calcScore(){
+    let score=0;
+    userSequence = getSequence();
+    for(let i=0; i<grid_size; i++){
+      if(originSequence[i] != ''){
+      if(originSequence[i] == userSequence[i])
+      {
+        score++;
+      }
+    }
+    }
+    console.log(score);
+    return score;
+  }
+
+  function addElementstoPallete(){
+    palette.innerHTML = ''; // Clear the palette
+    for (let i = 0; i < 16; i++){
+      const cell = document.createElement('div'); 
+      cell.classList.add('cell'); // Add the 'cell' class to the cell element
+      cell.dataset.position = i; // Set the custom 'position' attribute to store the position
+
+      const cellObj = document.createElement('div');
+      cellObj.setAttribute('id', grid_size+i)
+      cellObj.classList.add("cell-obj"); 
+      
+      let classObjName = originSequence[positions[i]];
+      cellObj.classList.add(classObjName); 
+      cellObj.dataset.objName = classObjName;
+      cellObj.setAttribute('draggable', true);
+
+      cellObj.addEventListener("dragstart", dragStart);
+      cellObj.addEventListener("dragend", dragEnd);
+
+        
+      cell.appendChild(cellObj);
+
+      cell.addEventListener("dragover", dragOver);
+      cell.addEventListener("drop", drop);
+    
+
+      palette.appendChild(cell); // Add the cell element to the grid
+
+    }
+      
+  }
+
+  function populateSolutionGrid(){
+    correctSolutionH3.textContent = 'Below is the Solution!';
+    solutionGrid.innerHTML = ''; // Clear the palette
+    console.log("originSequence: ",originSequence);
+    for (let i = 0; i < grid_size; i++){
+      let cell = document.createElement('div'); 
+      cell.classList.add('cell'); // Add the 'cell' class to the cell element
+      cell.dataset.position = i; // Set the custom 'position' attribute to store the position
+
+      let cellObj = document.createElement('div');
+      cellObj.setAttribute('id', grid_size*100+i);
+      cellObj.classList.add("cell-obj"); 
+      console.log('i',i);
+      console.log('originSequence[i]',originSequence[i]);
+      let classObjName =''
+      if(originSequence[i]){
+        classObjName = originSequence[i];
+        cellObj.classList.add(classObjName); 
+      } 
+      cellObj.dataset.objName = classObjName;        
+      
+      cell.appendChild(cellObj);    
+      solutionGrid.appendChild(cell); // Add the cell element to the grid
+    }
+      
+  }
+
+
+  // Submit the player's answer
+  function submitAnswer() {
+
+    if (isPlaying) {
+      isPlaying = false;
+
+      playerScore = calcScore();
+
+      message.textContent = 'You got '+playerScore+' correct!\
+      Your score: '+Math.floor(playerScore*100/16)+'%';
+
+      populateSolutionGrid();
+     
+
+    //   // Compare the player's answer with the correct objects' position, shape, and color
+    //   const isCorrect = sequence.every((position, index) => {
+    //     const cell = document.querySelector(`.cell[data-position="${position}"]`);
+    //     const shape = cell.textContent === '■' ? 'square' : 'circle';
+    //     const color = cell.style.color;
+    //     const playerObject = playerSelection[position];
+    //     return (
+    //       playerObject &&
+    //       playerObject.shape === shape &&
+    //       playerObject.color === color
+    //     );
+    //   });
+
+    //   // Provide feedback to the player
+    //   message.textContent = isCorrect ? 'Correct answer!' : 'Incorrect answer!';
+    //   message.style.color = isCorrect ? 'green' : 'red';
+
+    //   // Clear player's selection after a delay
+    //   setTimeout(() => {
+    //     grid.querySelectorAll('.cell').forEach(cell => {
+    //       cell.textContent = '';
+    //       cell.style.color = '';
+    //     });
+    //     playerSelection = []; // Clear the player's selection array
+    //     message.textContent = ''; // Clear the feedback message
+    //   }, 1500);
+    }
+  }
+
+  // Event listeners
+  startButton.addEventListener('click', startGame); // Call startGame function when the start button is clicked
+  submitButton.addEventListener('click', submitAnswer); // Call submitAnswer function when the submit button is clicked
+
+  // Initialize the game
+  displayObjects(); // Display the initial objects on the grid
+});

@@ -6,20 +6,24 @@
 </head>
 <body>
   <h1>Chunking Memory Game</h1>
+  <form action="/action_page.php">
+    <label for="vol">Select seconds to display (between 5 and 60):</label>
+    <input type="range" id="vol" name="vol" min="5" max="60" value="40" step="5" oninput="this.nextElementSibling.value = this.value">
+    <output id="timer-count">40</output>
+  </form>
   <div class="grid"></div>
   <div class="timer-container">
     <div class="timer"></div>
   </div>
-  <div class="palette">
-    <div class="object" draggable="true" data-shape="square" data-color="red">■</div>
-    <div class="object" draggable="true" data-shape="square" data-color="black">■</div>
-    <div class="object" draggable="true" data-shape="circle" data-color="red">●</div>
-    <div class="object" draggable="true" data-shape="circle" data-color="black">●</div>
-  </div>
   <button class="start-button">Start Game</button>
   <button class="submit-button">Submit</button>
   <p class="message"></p>
-
+  <div class="palette">
+  </div>
+  <br>
+  <br>
+  <h3 class="solution-grid-text"></h3>
+  <div class="solution-grid"></div>
   <script src="script.js"></script>
 </body>
 </html>

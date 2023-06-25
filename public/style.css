@@ -1,0 +1,126 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 400px;
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 400px;
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+.cell {
+  border: 1px solid #ccc;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+  }
+
+.black-square {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  padding: -1px;
+  border: -1px;
+  margin: -1px;
+}
+
+.red-square {
+  background-color: red;
+  height: 100%;
+  width: 100%;
+  padding: -1px;
+  border: -1px;
+  margin: -1px;
+}
+
+.black-circle {
+  background-color: black;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  padding: -1px;
+  border: -1px;
+  margin: -1px;
+}
+
+.red-circle {
+  background-color: red;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  padding: -1px;
+  border: -1px;
+  margin: -1px;
+}
+
+.timer-container {
+  width: 400px;
+  height: 30px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.timer {
+  width: 100%;
+  height: 100%;
+  background-color: #00bcd4;
+  position: absolute;
+  text-align: left;
+  font-size:larger;
+  top: 0;
+  left: 0;
+}
+
+
+.palette {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 400px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.object {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  cursor: move;
+}
+
+.start-button,
+.submit-button {
+  font-size: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.message {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.cell.dragging {
+  opacity: 0.5;
+}
+
+.hidden {
+  display: none;
+}
