@@ -6,8 +6,9 @@
 </head>
 <body>
   <h1>Chunking Memory Game</h1>
+  <p>Click on "Start Game" button below. After the timer elapses, recreate the below grid by dragging and dropping objects from the palette below to the grid!</p>
   <form action="/action_page.php">
-    <label for="vol">Select seconds to display (between 5 and 60):</label>
+    <label for="vol">Choose the seconds you need to memorize the grid (between 5 and 60 seconds):</label>
     <br>
     <input type="range" id="vol" name="vol" min="5" max="60" value="40" step="5" oninput="this.nextElementSibling.value = this.value">
     <output id="timer-count">40</output>
