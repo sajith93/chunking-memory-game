@@ -8,6 +8,7 @@
   <h1>Chunking Memory Game</h1>
   <form action="/action_page.php">
     <label for="vol">Select seconds to display (between 5 and 60):</label>
+    <br>
     <input type="range" id="vol" name="vol" min="5" max="60" value="40" step="5" oninput="this.nextElementSibling.value = this.value">
     <output id="timer-count">40</output>
   </form>

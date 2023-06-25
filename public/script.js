@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let originSequence = []
   let timerInterval=0;
-
+  let timeLeft = 0;
 
   // Start the game by displaying the sequence
   function startGame() {
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Start the timer
       let timerSettingInt = parseInt(timerSetting.textContent);
       let totalTime = timerSettingInt*100; // Set the initial time to 30 seconds
-      let timeLeft = totalTime;
+      timeLeft = totalTime;
       let timerWidth = 100; // Set the initial timer width to 100%
       timer.style.width = timerWidth + '%';
       timerInterval = setInterval(() => {
@@ -273,8 +273,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // Submit the player's answer
   function submitAnswer() {
 
-    if (isPlaying) {
+    if (isPlaying && (timeLeft <=0)) {
       isPlaying = false;
+
+      let cellObjs = document.querySelectorAll('.cell-obj');
+      cellObjs.forEach(cellObj => {
+        cellObj.setAttribute('draggable', false);
+        cellObj.removeEventListener("dragstart", dragStart);
+        cellObj.removeEventListener("dragend", dragEnd);      
+      });
 
       playerScore = calcScore();
 
@@ -283,33 +290,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       populateSolutionGrid();
      
-
-    //   // Compare the player's answer with the correct objects' position, shape, and color
-    //   const isCorrect = sequence.every((position, index) => {
-    //     const cell = document.querySelector(`.cell[data-position="${position}"]`);
-    //     const shape = cell.textContent === '■' ? 'square' : 'circle';
-    //     const color = cell.style.color;
-    //     const playerObject = playerSelection[position];
-    //     return (
-    //       playerObject &&
-    //       playerObject.shape === shape &&
-    //       playerObject.color === color
-    //     );
-    //   });
-
-    //   // Provide feedback to the player
-    //   message.textContent = isCorrect ? 'Correct answer!' : 'Incorrect answer!';
-    //   message.style.color = isCorrect ? 'green' : 'red';
-
-    //   // Clear player's selection after a delay
-    //   setTimeout(() => {
-    //     grid.querySelectorAll('.cell').forEach(cell => {
-    //       cell.textContent = '';
-    //       cell.style.color = '';
-    //     });
-    //     playerSelection = []; // Clear the player's selection array
-    //     message.textContent = ''; // Clear the feedback message
-    //   }, 1500);
     }
   }
 
