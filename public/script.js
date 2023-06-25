@@ -131,10 +131,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Start the game by displaying the sequence
   function startGame() {
+
+    if (!isPlaying) {
     grid.innerHTML = ''; // Clear the grid
     palette.innerHTML = ''; // Clear the grid
     solutionGrid.innerHTML = '';// Clear the solution grid
     correctSolutionH3.textContent = '';
+    message.textContent = '';
     originSequence = []
 
     try{
@@ -145,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     displayObjects()
 
-    // if (!isPlaying) {
+    
       isPlaying = true;
 
       let cellObjs = document.querySelectorAll(".cell-obj");
@@ -192,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
           
         
       
-    // }
+    }
   }
 
   function calcScore(){
