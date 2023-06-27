@@ -133,3 +133,7 @@
 .pastel-green {
   background-color: #D5F5E3;
 }
+
+.no-select {
+  user-select: none;
+}
