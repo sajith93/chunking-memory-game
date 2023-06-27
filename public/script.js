@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
       timerInterval = setInterval(() => {
         timeLeft--;
         timerWidth = (timeLeft / totalTime) * 100;
-        timer.style.width = timerWidth + '%';
+        timer.style.height = timerWidth + '%';
         if (timeLeft>= 0){
           timer.textContent = Math.ceil(timeLeft/100);
           }else{

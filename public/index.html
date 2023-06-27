@@ -2,30 +2,59 @@
 <html>
 <head>
   <title>Chunking Memory Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .flex-gap {
+      gap: 10px; /* Adjust the value as needed */
+    }
+    .vertical-invert {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  </style>
 </head>
-<body>
-  <h1>Chunking Memory Game</h1>
-  <p>Click on "Start Game" button below. After the timer elapses, recreate the below grid by dragging and dropping objects from the palette below to the grid!</p>
-  <form action="/action_page.php">
-    <label for="vol">Choose the seconds you need to memorize the grid (between 5 and 60 seconds):</label>
-    <br>
-    <input type="range" id="vol" name="vol" min="5" max="60" value="40" step="5" oninput="this.nextElementSibling.value = this.value">
-    <output id="timer-count">40</output>
-  </form>
-  <div class="grid"></div>
-  <div class="timer-container">
+<body class="container-xxl col-md-12" style="padding-top: 10px;">
+  <div class="d-flex flex-column  justify-content-center align-items-center pt-2 mt-3 mb-4 text-dark text-decoration-none">
+    
+  <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Chunking Memory Game</h1>
+  <br>
+  <p class="lead text-body-emphasis  bx-5 mx-5 px-1 mb-4">Click on "Start Game" button below. After the timer elapses, recreate the below grid by dragging and dropping objects from the palette below to the grid!</p>
+  
+  <div class = "container-fluid d-flex flex-column justify-content-center align-items-center px-0 mx-0 bx-0 ">
+    <form >
+      <div class = "container-fluid col-12 d-flex flex-column justify-content-center align-items-center  px-0 mx-0 bx-0">
+      <label class="container-fluid lead text-body-emphasis  col-12" for="vol">Choose the time you need to memorize the grid (between 5 and 60 seconds):</label>
+      <div class = "d-flex flex-row justify-content-center align-items-center ">
+      <input class="py-2" type="range" id="vol" name="vol" min="5" max="60" value="60" step="5" oninput="this.nextElementSibling.value = this.value">
+      <output class="px-2" id="timer-count">  60</output>
+      </div>  
+    </div>
+    </form>
+  <div class = "container-fluid d-flex flex-row justify-content-center px-0 mx-0 bx-0 flex-gap" style="padding-left: 0px; margin-left: 0px">
+  <div class="timer-container col-1 d-flex flex-column flex-column-reverse align-items-end">
     <div class="timer"></div>
   </div>
-  <button class="start-button">Start Game</button>
-  <button class="submit-button">Submit</button>
+  <div class="grid col-7" ></div> 
+  <div class="palette col-4 ml-1 pl-1"></div> 
+</div>
+<div class = "d-flex flex-row justify-content-center px-0 mx-0 bx-0 flex-gap" style="padding-left: 0px; margin-left: 0px">
+  <button class="start-button btn btn-dark btn-lg px-4 gap-3">Start Game</button>
+  <button class="submit-button btn btn-dark btn-lg px-4">Submit</button>
+</div>
+  
   <p class="message"></p>
-  <div class="palette">
+  
   </div>
   <br>
   <br>
   <h3 class="solution-grid-text"></h3>
   <div class="solution-grid"></div>
   <script src="script.js"></script>
+</div>
+  </div>
+</div>
+
 </body>
 </html>
