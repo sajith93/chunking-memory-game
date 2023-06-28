@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
     { shape: 'circle', color: 'black' }
   ];
 
+  var element = document.querySelector('.no-select');
+
+  element.addEventListener('touchstart', function(event) {
+    event.preventDefault();
+  }, { passive: false });
+
   let playerSelection = []; // Store the player's object selection
   let isPlaying = false; // Flag to check if the game is currently being played
   let draggingObject = null; // Store the currently dragging object
