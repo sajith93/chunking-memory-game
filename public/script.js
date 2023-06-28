@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
     { shape: 'circle', color: 'black' }
   ];
 
+
+  submitButton.classList.add('hidden');
   var element = document.querySelector('.no-select');
   var longPressDuration = 500; // Set the duration for a long press in milliseconds
 
@@ -169,6 +171,9 @@ document.addEventListener('DOMContentLoaded', function () {
     palette.classList.remove('hidden');
     timerContainer.classList.remove('hidden');
     timer.classList.remove('hidden');
+    
+    startButton.classList.add('hidden')
+    submitButton.classList.add('hidden');
 
     try{
       clearInterval(timerInterval);
@@ -212,6 +217,9 @@ document.addEventListener('DOMContentLoaded', function () {
               
               timerContainer.classList.add('hidden');
               timer.classList.add('hidden');
+
+              startButton.classList.add('hidden');
+              submitButton.classList.remove('hidden');
  
             });
             console.log("originSequence:", originSequence);
@@ -321,6 +329,9 @@ document.addEventListener('DOMContentLoaded', function () {
         palette.classList.add('hidden');
         timerContainer.classList.add('hidden');
         timer.classList.add('hidden');
+        startButton.textContent = "Play Again";
+        startButton.classList.remove('hidden');
+        submitButton.classList.add('hidden');
       });
 
       playerScore = calcScore();
