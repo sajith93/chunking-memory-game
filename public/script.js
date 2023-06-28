@@ -18,10 +18,30 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
 
   var element = document.querySelector('.no-select');
+  var longPressDuration = 500; // Set the duration for a long press in milliseconds
+
+  var pressTimer;
 
   element.addEventListener('touchstart', function(event) {
-    event.preventDefault();
-  }, { passive: false });
+    pressTimer = setTimeout(function() {
+      event.preventDefault();
+      element.style.webkitUserSelect = 'none';
+      element.style.userSelect = 'none';
+    }, longPressDuration);
+  });
+
+  element.addEventListener('touchend', function() {
+    clearTimeout(pressTimer);
+    element.style.webkitUserSelect = 'text';
+    element.style.userSelect = 'text';
+  });
+
+  element.addEventListener('touchmove', function() {
+    clearTimeout(pressTimer);
+    element.style.webkitUserSelect = 'text';
+    element.style.userSelect = 'text';
+  });
+
 
   let playerSelection = []; // Store the player's object selection
   let isPlaying = false; // Flag to check if the game is currently being played
