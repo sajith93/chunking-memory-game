@@ -28,7 +28,7 @@
       </h1>
       <br />
       <p
-        class="container-fluid lead text-body-emphasis d-flex flex-row justify-content-center bx-5 mx-5 px-5 mb-4"
+        class="container-fluid lead display-7 fw-bold text-body-emphasis d-flex flex-row justify-content-center bx-5 mx-5 px-5 mb-4"
       >
         Click on "Start Game" button below. After the timer elapses, recreate
         the below grid by dragging and dropping objects from the palette below
@@ -45,7 +45,7 @@
             class="container-fluid d-flex flex-column justify-content-center align-items-center px-0 mx-0 bx-0"
           >
             <label
-              class="container-fluid lead text-body-emphasis d-flex flex-row justify-content-center align-items-center col-12"
+              class="container-fluid lead display-7 fw-bold text-body-emphasis d-flex flex-row justify-content-center align-items-center col-12"
               for="vol"
               >Choose the time you need to memorize the grid (between 5 and 60
               seconds):</label
@@ -54,7 +54,7 @@
               class="d-flex flex-row justify-content-center align-items-center"
             >
               <input
-                class="py-2"
+                class="custom-range py-4"
                 type="range"
                 id="vol"
                 name="vol"
@@ -64,7 +64,7 @@
                 step="5"
                 oninput="this.nextElementSibling.value = this.value"
               />
-              <output class="px-2" id="timer-count"> 60</output>
+              <output class="lead display-7 fw-bold text-body-emphasis px-2" id="timer-count"> 60</output>
             </div>
           </div>
         </form>

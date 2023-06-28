@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   margin-bottom: 10px;
 }
 
@@ -11,8 +11,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   margin-bottom: 10px;
 }
 
@@ -67,7 +67,7 @@
 
 .timer-container {
   width: 40px;
-  height: 600px;
+  height: 800px;
   border: 1px solid #ccc;
   position: relative;
 }
@@ -87,7 +87,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(8, 1fr);
   width: 150px;
-  height: 600px;
+  height: 800px;
 }
 
 .object {
@@ -108,7 +108,7 @@
   padding: 5px 10px;
   cursor: pointer;
   font-size: 30px;
-  
+
 }
 
 .message {
@@ -149,4 +149,9 @@
 .square {
   background-color: #f2f2f2;
   padding-top: 70%; /* Set the aspect ratio for the square */
+}
+
+.custom-range {
+  width: 300px; /* Set the desired width */
+  height: 10px; /* Set the desired height */
 }
