@@ -166,6 +166,10 @@ document.addEventListener('DOMContentLoaded', function () {
     message.textContent = '';
     originSequence = []
 
+    palette.classList.remove('hidden');
+    timerContainer.classList.remove('hidden');
+    timer.classList.remove('hidden');
+
     try{
       clearInterval(timerInterval);
       console.log('reset interval;');
@@ -205,6 +209,9 @@ document.addEventListener('DOMContentLoaded', function () {
               cellObj.className = 'cell-obj grid-cell-obj'
               cellObj.setAttribute('draggable', true);
               // cellObj.classList.add('hidden');
+              
+              timerContainer.classList.add('hidden');
+              timer.classList.add('hidden');
  
             });
             console.log("originSequence:", originSequence);
@@ -309,7 +316,11 @@ document.addEventListener('DOMContentLoaded', function () {
       cellObjs.forEach(cellObj => {
         cellObj.setAttribute('draggable', false);
         cellObj.removeEventListener("dragstart", dragStart);
-        cellObj.removeEventListener("dragend", dragEnd);      
+        cellObj.removeEventListener("dragend", dragEnd);  
+        
+        palette.classList.add('hidden');
+        timerContainer.classList.add('hidden');
+        timer.classList.add('hidden');
       });
 
       playerScore = calcScore();

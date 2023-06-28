@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   margin-bottom: 10px;
 }
 
@@ -11,8 +11,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   margin-bottom: 10px;
 }
 
@@ -67,7 +67,7 @@
 
 .timer-container {
   width: 40px;
-  height: 400px;
+  height: 600px;
   border: 1px solid #ccc;
   position: relative;
 }
@@ -86,8 +86,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  width: 120px;
-  height: 400px;
+  width: 150px;
+  height: 600px;
 }
 
 .object {
@@ -120,6 +120,11 @@
 
 .hidden {
   display: none;
+  border: 0px;
+  height: 0px;
+  width: 0px;
+  padding: 0%;
+  margin: 0%;
 }
 
 .pastel-blue {
@@ -137,4 +142,9 @@
 
 .no-select {
   user-select: none;
+}
+
+.square {
+  background-color: #f2f2f2;
+  padding-top: 70%; /* Set the aspect ratio for the square */
 }
