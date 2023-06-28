@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 800px;
-  height: 800px;
+  width: 700px;
+  height: 700px;
   margin-bottom: 10px;
 }
 
@@ -11,8 +11,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 800px;
-  height: 800px;
+  width: 700px;
+  height: 700px;
   margin-bottom: 10px;
 }
 
@@ -67,7 +67,7 @@
 
 .timer-container {
   width: 40px;
-  height: 800px;
+  height: 700px;
   border: 1px solid #ccc;
   position: relative;
 }
@@ -84,10 +84,10 @@
 
 .palette {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-  width: 150px;
-  height: 800px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 700px;
+  height: 150px;
 }
 
 .object {
