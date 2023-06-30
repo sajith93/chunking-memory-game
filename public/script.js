@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         cellObj.addEventListener("dragstart", dragStart);
+        cellObj.addEventListener("touchstart", touchStart);
         cellObj.addEventListener("dragend", dragEnd);
 
         cellObj.classList.add('hidden');
@@ -145,6 +146,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     console.log(currentSequence);
     return currentSequence;
+  }
+
+  function touchStart(event) {
+    event.dataTransfer.setData("draggedCellObjId", event.target.id);
+    setTimeout(() => {
+      event.preventDefault();
+      element.style.webkitUserSelect = 'none';
+      element.style.userSelect = 'none';
+      event.target.classList.toggle("hidden");
+    }
+      );
   }
 
   function dragStart(event) {
@@ -302,6 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
       cellObj.setAttribute('draggable', true);
 
       cellObj.addEventListener("dragstart", dragStart);
+      cellObj.addEventListener("touchstart", touchStart);
       cellObj.addEventListener("dragend", dragEnd);
 
         
@@ -355,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
       cellObjs.forEach(cellObj => {
         cellObj.setAttribute('draggable', false);
         cellObj.removeEventListener("dragstart", dragStart);
+        cellObj.removeEventListener("touchstart", touchStart);
         cellObj.removeEventListener("dragend", dragEnd);  
         
         palette.classList.add('hidden'); 
