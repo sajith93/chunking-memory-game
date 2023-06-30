@@ -10,6 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const timerSetting = document.querySelector('#timer-count');
   const correctSolutionH3 = document.querySelector('.solution-grid-text');
 
+ // Prevent scrolling when touching the container div
+    grid.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+    }, { passive: false });
+     // Prevent scrolling when touching the container div
+     palette.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+    }, { passive: false });
+
+
   const objects = [
     { shape: 'square', color: 'red' },
     { shape: 'square', color: 'black' },
