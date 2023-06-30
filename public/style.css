@@ -38,6 +38,7 @@
   padding: -1px;
   border: -1px;
   margin: -1px;
+  will-change: transform;
 }
 
 .red-square {
@@ -47,6 +48,7 @@
   padding: -1px;
   border: -1px;
   margin: -1px;
+  will-change: transform;
 }
 
 .black-circle {
@@ -57,6 +59,8 @@
   padding: -1px;
   border: -1px;
   margin: -1px;
+  will-change: transform; /* Optimize for transform animations */
+  
 }
 
 .red-circle {
@@ -67,6 +71,7 @@
   padding: -1px;
   border: -1px;
   margin: -1px;
+  will-change: transform;
 }
 
 .timer-container {
