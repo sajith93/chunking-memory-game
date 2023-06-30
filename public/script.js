@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   submitButton.classList.add('hidden');
+  palette.classList.add('hidden');
+  solutionGrid.classList.add('hidden');
+
   var element = document.querySelector('.no-select');
   var longPressDuration = 500; // Set the duration for a long press in milliseconds
 
@@ -168,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
     message.textContent = '';
     originSequence = []
 
-    palette.classList.remove('hidden');
+    solutionGrid.classList.add('hidden');
     timerContainer.classList.remove('hidden');
     timer.classList.remove('hidden');
     
@@ -219,7 +222,9 @@ document.addEventListener('DOMContentLoaded', function () {
               timer.classList.add('hidden');
 
               startButton.classList.add('hidden');
+
               submitButton.classList.remove('hidden');
+              palette.classList.remove('hidden');
  
             });
             console.log("originSequence:", originSequence);
@@ -326,12 +331,16 @@ document.addEventListener('DOMContentLoaded', function () {
         cellObj.removeEventListener("dragstart", dragStart);
         cellObj.removeEventListener("dragend", dragEnd);  
         
-        palette.classList.add('hidden');
+        palette.classList.add('hidden'); 
         timerContainer.classList.add('hidden');
         timer.classList.add('hidden');
         startButton.textContent = "Play Again";
-        startButton.classList.remove('hidden');
         submitButton.classList.add('hidden');
+
+        startButton.classList.remove('hidden');
+        solutionGrid.classList.remove('hidden');
+
+        
       });
 
       playerScore = calcScore();
