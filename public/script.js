@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
   timer.classList.add('hidden');
 
   var element = document.querySelector('.no-select');
-  var longPressDuration = 0.1; // Set the duration for a long press in milliseconds
+  var longPressDuration = 1; // Set the duration for a long press in milliseconds
 
   var pressTimer;
 
@@ -139,7 +139,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function dragStart(event) {
     event.dataTransfer.setData("draggedCellObjId", event.target.id);
-    setTimeout(() => event.target.classList.toggle("hidden"));
+    setTimeout(() => {
+      event.preventDefault();
+      element.style.webkitUserSelect = 'none';
+      element.style.userSelect = 'none';
+      event.target.classList.toggle("hidden");
+    }
+      );
   }
 
   function dragEnd(event) {
