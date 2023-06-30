@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
   timer.classList.add('hidden');
 
   var element = document.querySelector('.no-select');
-  var longPressDuration = 5; // Set the duration for a long press in milliseconds
+  var longPressDuration = 0.1; // Set the duration for a long press in milliseconds
 
   var pressTimer;
 
