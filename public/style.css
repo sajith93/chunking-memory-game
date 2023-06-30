@@ -180,5 +180,7 @@
 .custom-range {
   width: 300px; /* Set the desired width */
   height: 10px; /* Set the desired height */
-  font-size: 30px;
+  background-color: orange;
+  font-size: 90px;
+  border-radius: 1px;
 }

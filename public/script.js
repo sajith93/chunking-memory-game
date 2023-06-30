@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
   submitButton.classList.add('hidden');
   palette.classList.add('hidden');
   solutionGrid.classList.add('hidden');
+  timerContainer.classList.add('hidden');
+  timer.classList.add('hidden');
 
   var element = document.querySelector('.no-select');
-  var longPressDuration = 500; // Set the duration for a long press in milliseconds
+  var longPressDuration = 5; // Set the duration for a long press in milliseconds
 
   var pressTimer;
 
