@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
     { shape: 'circle', color: 'black' }
   ];
 
+  grid_width = 700;
+  grid_cell_dim = 700/6;
+  palette.style.width = (grid_cell_dim*8) +'px';
+  palette.style.height = (grid_cell_dim * 2) +'px';
+  grid.style.width = grid_width +'px';
+  grid.style.height = grid_width +'px';
+  solutionGrid.style.width = grid_width +'px';
+  solutionGrid.style.height = grid_width +'px';
 
   submitButton.classList.add('hidden');
   palette.classList.add('hidden');

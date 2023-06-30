@@ -2,8 +2,6 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 700px;
-  height: 700px;
   margin-bottom: 10px;
   border: solid 3px grey;
 }
@@ -12,8 +10,6 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 700px;
-  height: 700px;
   margin-bottom: 10px;
   border: solid 3px grey;
 }
@@ -22,17 +18,12 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  width: 700px;
-  height: 150px;
   border: solid 3px grey;
   
 }
 
 .cell {
   border: solid 3px grey;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   font-size: 24px;
   cursor: pointer;
   padding: 0px;
@@ -79,7 +70,7 @@
 }
 
 .timer-container {
-  width: 40px;
+  width: 60px;
   height: 700px;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -92,7 +83,7 @@
   border-radius: 10px;
   background-color: #C4D7B2;
   text-align:center;
-  font-size:larger;
+  font-size:40px;
   
 }
 
