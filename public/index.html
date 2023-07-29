@@ -23,13 +23,13 @@
     <div
       class="d-flex flex-column justify-content-center align-items-center pt-2 mt-3 mb-4 text-dark text-decoration-none"
     >
-      <h1 class="container-fluid d-flex flex-row justify-content-center align-items-center  display-5 fw-bold text-body-emphasis lh-1 mb-3  title-bg-color">
+      <h1 class="container-fluid d-flex flex-row justify-content-center align-items-center display-5 fw-bold lh-1 mb-3  title-bg-color text-color">
         Chunking Memory Game
       </h1>
       <br />
       <section class="content-bg-color">
         <h3
-          class="container-fluid  d-flex flex-row justify-content-center bx-5 mx-5 px-5 mb-4"
+          class="container-fluid  d-flex flex-row justify-content-center bx-5 mx-5 px-5 mb-4 text-color"
         >
         Click the "Start Game" button below. Remember where the objects are placed on the Grid before the timer runs out. When the timer is up, use the palette below to drag and drop the objects to their correct positions on the grid!
       </h3>
@@ -44,7 +44,7 @@
               class="container-fluid d-flex flex-column justify-content-center align-items-center px-0 mx-0 bx-0"
             >
               <label
-                class="container-fluid lead display-7 fw-bold text-body-emphasis d-flex flex-row justify-content-center align-items-center col-12"
+                class="container-fluid lead display-7 fw-bold d-flex flex-row justify-content-center align-items-center col-12 text-color"
                 for="vol"
                 ><h4>Choose the time you need to memorize the grid (between 5 and 60
                   seconds):</h4></label
@@ -61,14 +61,11 @@
                   max="60"
                   value="60"
                   step="5"
-                  oninput="this.nextElementSibling.value = this.value"
+                  oninput="updateOutputValue(this.value)"
+                  <!-- oninput="this.nextElementSibling.value = this.value" -->
                 />
-                <output
-                  class="lead display-7 fw-bold text-body-emphasis px-2"
-                  id="timer-count"
-                >
-                  60</output
-                >
+
+                <p id="timer-count" class="lead display-7 fw-bold px-2 text-color">60</p>
               </div>
             </div>
           </form>

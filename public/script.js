@@ -393,6 +393,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+ 
   // Event listeners
   startButton.addEventListener('click', startGame); // Call startGame function when the start button is clicked
   submitButton.addEventListener('click', submitAnswer); // Call submitAnswer function when the submit button is clicked
@@ -400,3 +401,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initialize the game
   displayObjects(); // Display the initial objects on the grid
 });
+
+function updateOutputValue(value) {
+  const outputValue = document.getElementById('timer-count');
+  outputValue.textContent = value;
+}

@@ -32,7 +32,7 @@
   }
 
 .black-square {
-  background-color: black;
+  background-color: rgb(164, 164, 164);
   height: 100%;
   width: 100%;
   padding: -1px;
@@ -42,7 +42,7 @@
 }
 
 .red-square {
-  background-color: rgb(212, 3, 3);
+  background-color: rgb(208, 76, 76);
   height: 100%;
   width: 100%;
   padding: -1px;
@@ -52,7 +52,7 @@
 }
 
 .black-circle {
-  background-color: black;
+  background-color: rgb(164, 164, 164);
   border-radius: 50%;
   height: 100%;
   width: 100%;
@@ -64,7 +64,7 @@
 }
 
 .red-circle {
-  background-color: rgb(212, 3, 3);
+  background-color: rgb(208, 76, 76);
   border-radius: 50%;
   height: 100%;
   width: 100%;
@@ -78,7 +78,7 @@
   width: 60px;
   height: 700px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid rgb(97, 97, 97);
   position: relative;
 }
 
@@ -160,11 +160,10 @@
   background-color: #5d6357;
   height: 100px;
   border-radius: 10px;
-  color: white;
 }
 
 .content-bg-color {
-  background-color: #a5a3a3;
+  background-color: #101010;
 }
 
 
@@ -191,5 +190,10 @@
 }
 
 body {
-  background-color: #a5a3a3
+  background-color: #101010;
+  color: #ffffff;
+}
+
+.text-color{
+  color: rgb(202, 202, 202);
 }
