@@ -3,7 +3,7 @@
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
   margin-bottom: 10px;
-  border: solid 3px grey;
+  border: solid 3px black;
 }
 
 .solution-grid {
@@ -11,19 +11,19 @@
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
   margin-bottom: 10px;
-  border: solid 3px grey;
+  border: solid 3px black;
 }
 
 .palette {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  border: solid 3px grey;
+  border: solid 3px black;
   
 }
 
 .cell {
-  border: solid 3px grey;
+  border: solid 3px black;
   font-size: 24px;
   cursor: pointer;
   padding: 0px;
@@ -164,7 +164,7 @@
 }
 
 .content-bg-color {
-  background-color: white;
+  background-color: #a5a3a3;
 }
 
 
@@ -188,4 +188,8 @@
   background-color: orange;
   font-size: 90px;
   border-radius: 1px;
+}
+
+body {
+  background-color: #a5a3a3
 }
