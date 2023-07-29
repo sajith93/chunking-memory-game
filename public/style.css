@@ -2,28 +2,28 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  margin-bottom: 10px;
-  border: solid 3px black;
+  /*margin-bottom: 10px;*/
+  border: solid 3px rgb(97, 97, 97);
 }
 
 .solution-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  margin-bottom: 10px;
-  border: solid 3px black;
+  /* margin-bottom: 10px; */
+  border: solid 3px rgb(97, 97, 97);
 }
 
 .palette {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  border: solid 3px black;
+  border: solid 3px rgb(97, 97, 97);
   
 }
 
 .cell {
-  border: solid 3px black;
+  border: solid 3px rgb(97, 97, 97);
   font-size: 24px;
   cursor: pointer;
   padding: 0px;
