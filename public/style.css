@@ -32,7 +32,7 @@
   }
 
 .black-square {
-  background-color: #3a3a3a;
+  background-color: #186c6e;
   height: 100%;
   width: 100%;
   padding: -1px;
@@ -52,7 +52,7 @@
 }
 
 .black-circle {
-  background-color: #3a3a3a;
+  background-color: #186c6e;
   border-radius: 50%;
   height: 100%;
   width: 100%;
